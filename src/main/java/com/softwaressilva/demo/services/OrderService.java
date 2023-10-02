@@ -27,4 +27,8 @@ public class OrderService {
 	public Order insert(Order obj) {
 		return repository.save(obj);
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
