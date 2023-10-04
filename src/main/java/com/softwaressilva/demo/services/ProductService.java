@@ -12,6 +12,8 @@ import com.softwaressilva.demo.repositories.ProductRepository;
 import com.softwaressilva.demo.services.exceptions.DatabaseException;
 import com.softwaressilva.demo.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ProductService {
 	
@@ -43,9 +45,13 @@ public class ProductService {
 	}
 	
 	public Product update(Long id, Product obj) {
-		Product entity = repository.getReferenceById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			Product entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Product entity, Product obj) {

@@ -8,10 +8,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.softwaressilva.demo.entities.Category;
-import com.softwaressilva.demo.entities.User;
 import com.softwaressilva.demo.repositories.CategoryRepository;
 import com.softwaressilva.demo.services.exceptions.DatabaseException;
 import com.softwaressilva.demo.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -44,9 +45,13 @@ public class CategoryService {
 	}
 	
 	public Category update(Long id, Category obj) {
-		Category entity = repository.getReferenceById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			Category entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);	
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Category entity, Category obj) {
