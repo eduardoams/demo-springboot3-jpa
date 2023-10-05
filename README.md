@@ -1,5 +1,3 @@
-![Java](https://miro.medium.com/v2/resize:fit:1358/1*yIEa02vx20jdlcWWJM-L4Q.jpeg)
-
 # Aplicação Java com Spring Boot
 
 Aplicação Java com Spring Boot para o gerenciamento de pedidos de uma loja é um sistema que utiliza a estrutura do Spring Boot para criar uma API que permite o controle de operações relacionadas a clientes, produtos e pedidos. Essa aplicação facilita o gerenciamento eficiente de uma loja, oferecendo funcionalidades como cadastro, edição, exclusão e atualização de informações.
